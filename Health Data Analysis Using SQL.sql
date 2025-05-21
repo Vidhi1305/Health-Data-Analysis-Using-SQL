@@ -51,8 +51,9 @@ order by `Gender (Patient)`
 
 -- COMMAND ----------
 
-select `Health Zone (Patient)`,`Health Zone (Physician)`, sum(`Health Zone (Physician)`) as visit
+select `Health Zone (Patient)`,`Health Zone (Physician)`, sum(`Number of Visits`) as visit
 from health_data
+WHERE `Health Zone (Patient)` != `Health Zone (Physician)`
 group by `Health Zone (Patient)`,`Health Zone (Physician)`
 order by `Health Zone (Patient)`
 
@@ -66,7 +67,7 @@ order by `Health Zone (Patient)`
 select `Visit Type` , sum(`Number of Visits`) as total
 from health_data
 group by `Visit Type`
-order by `Visit Type`
+order by total desc
 
 -- COMMAND ----------
 
@@ -126,5 +127,5 @@ group by `Health Zone (Patient)`,`Health Zone (Physician)`
 select `Age Group (Patient)`, YYYYMM,`Visit Type`, sum(`Number of Visits`) 
 from health_data
 where `Age Group (Patient)` = '00 - 04 Years'
-group by YYYYMM , `Age Group (Patient)`,`Visit Type`
+group by YYYYMM
 order by YYYYMM
